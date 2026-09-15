@@ -1,0 +1,15 @@
+{
+  "name": "AAM Daily Report",
+  "short_name": "AAM Daily Report",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b6b5c",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
