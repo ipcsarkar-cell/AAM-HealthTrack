@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Ayushman Arogya Mandir Daily Reporting System">
+<link rel="manifest" href="manifest.json">
+<title>Ayushman Arogya Mandir — Daily Report</title>
+<style>
+:root{--teal:#0f766e;--teal2:#115e59;--bg:#f4f8f8;--card:#fff;--text:#18312f;--muted:#647875;--line:#dce8e6;--danger:#b42318;--shadow:0 8px 25px rgba(15,118,110,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:250px;background:linear-gradient(180deg,var(--teal2),#0b4f4b);color:#fff;padding:18px 14px;z-index:10}.brand{display:flex;align-items:center;gap:10px;padding:8px 8px 18px}.brand img{width:48px;height:58px;object-fit:cover;border-radius:7px;background:#fff}.brand b{font-size:15px;line-height:1.2}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#e7fffc;text-align:left;padding:12px 13px;border-radius:10px}.nav button:hover,.nav button.active{background:rgba(255,255,255,.14)}.main{margin-left:250px;padding:22px;max-width:1500px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.topbar h1{margin:0;font-size:24px}.topbar p{margin:4px 0 0;color:var(--muted)}.primary{background:var(--teal);color:white;border:0;border-radius:10px;padding:11px 15px;font-weight:700}.secondary{background:white;color:var(--teal2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-weight:700}.danger{background:#fff4f2;color:var(--danger);border:1px solid #ffd7d2;border-radius:10px;padding:9px 12px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.stat small,.muted{color:var(--muted)}.stat strong{display:block;font-size:28px;margin-top:8px}.section{margin-top:18px}.section h2{font-size:18px;margin:0 0 12px}.two{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;border:1px solid #cfdedb;border-radius:9px;padding:10px;background:#fff;color:var(--text)}.readonly{background:#f0f6f5!important}.service-card{margin-top:12px}.service-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.service-head h3{margin:0;font-size:16px}.subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}.subbox{border:1px solid var(--line);border-radius:11px;padding:12px}.subbox h4{margin:0 0 10px;font-size:14px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff}.table{width:100%;border-collapse:collapse;min-width:900px}.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.table th{background:#eef7f6}.pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#e7f5f3;color:var(--teal2);font-size:12px;font-weight:700}.hidden{display:none}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.mobilebar{display:none}.chart{height:220px;display:flex;align-items:end;gap:8px;padding:15px 5px 5px}.bar{flex:1;background:var(--teal);border-radius:7px 7px 2px 2px;min-width:18px;position:relative}.bar span{position:absolute;bottom:-23px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}.field input:disabled{background:#eef3f2;color:#8a9996}.toast{position:fixed;right:20px;bottom:20px;background:#173c39;color:white;padding:12px 15px;border-radius:10px;display:none;z-index:50}
+@media(max-width:900px){.sidebar{display:none}.main{margin:0;padding:14px 14px 82px}.grid{grid-template-columns:repeat(2,1fr)}.two,.subgrid{grid-template-columns:1fr}.formgrid{grid-template-columns:repeat(2,1fr)}.mobilebar{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:20;justify-content:space-around;padding:8px}.mobilebar button{border:0;background:transparent;color:var(--muted);font-size:11px}.mobilebar button.active{color:var(--teal);font-weight:800}.mobilebar span{display:block;font-size:18px}.topbar h1{font-size:20px}}@media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:9px}.card{padding:13px}.formgrid{grid-template-columns:1fr 1fr}.stat strong{font-size:23px}.topbar{align-items:flex-start}.topbar .primary{padding:9px}.brand img{width:42px;height:50px}}
+.auth-overlay{position:fixed;inset:0;background:rgba(244,248,248,.98);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}.auth-card{width:min(430px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.12)}.auth-card img{display:block;width:80px;height:80px;object-fit:contain;margin:0 auto 12px;border-radius:12px}.auth-card h2{text-align:center;margin:5px 0}.auth-card p{text-align:center;color:var(--muted)}.auth-card .field{margin-top:12px}.auth-msg{min-height:20px;margin-top:10px;font-size:13px;font-weight:700}.auth-user{font-size:12px;color:var(--muted);text-align:right}.cloud-badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#e7f5f3;color:var(--teal2);font-size:12px;font-weight:800}.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}@media(max-width:520px){.auth-card{padding:18px}}
+</style>
+</head>
+<body>
+<div id="authOverlay" class="auth-overlay">
+  <div class="auth-card">
+    <img src="logo.jpg" alt="AAM logo">
+    <h2>AAM Daily Report</h2>
+    <p>Secure cloud reporting system</p>
+    <div id="loginForm">
+      <div class="field"><label>Email address</label><input id="authEmail" type="email" autocomplete="email" placeholder="Enter your email"></div>
+      <div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Enter your password"></div>
+      <div class="actions"><button class="primary" style="width:100%" onclick="cloudLogin()">🔐 Sign In</button></div>
+      <div class="actions"><button class="secondary" style="width:100%" onclick="cloudSignup()">Create New Account</button></div>
+      <div id="authMsg" class="auth-msg"></div>
+    </div>
+  </div>
+</div>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><img src="logo.jpg" alt="Ayushman Bharat Health and Wellness Centres"><b>Ayushman Arogya Mandir<br><small>Daily Reporting System</small></b></div>
+  <div class="nav">
+    <button data-page="dashboard">🏠 Dashboard</button>
+    <button data-page="daily-entry">📝 Daily Entry</button>
+    <button data-page="daily-records">📋 Daily Report</button>
+    <button data-page="monthly-report">📊 Monthly Report</button>
+    <button data-page="monthly-comparison">📈 Monthly Comparison</button>
+    <button data-page="ai-report-assistant">🤖 AI Report Assistant</button>
+    <button data-page="backup">💾 Backup</button>
+    <button data-page="settings">⚙️ Settings</button>
+    <button data-page="facility-profile">🏥 Facility Profile</button>
+    <button data-page="profile">👤 My Profile</button>
+  </div>
+</aside>
+<main class="main">
+  <div class="topbar"><div><h1 id="pageTitle">Dashboard</h1><p id="pageSub">Ayushman Arogya Mandir reporting</p></div><div class="top-actions"><span id="cloudStatus" class="cloud-badge">☁ Connecting…</span><button id="logoutBtn" class="secondary" onclick="cloudLogout()" style="display:none">Logout</button><button class="primary" onclick="showPage('daily-entry')">＋ Enter Today's Data</button></div></div>
+
+  <section id="dashboard" class="page">
+    <div class="grid">
+      <div class="card stat"><small>Total OPD Footfall</small><strong id="dOpd">0</strong></div>
+      <div class="card stat"><small>Male</small><strong id="dMale">0</strong></div>
+      <div class="card stat"><small>Female</small><strong id="dFemale">0</strong></div>
+      
+    </div>
+    <div class="section two">
+      <div class="card"><h2>Today's Overview</h2><div id="dashOverview" class="muted">No daily record saved yet.</div></div>
+      <div class="card"><h2>Monthly OPD Trend</h2><div id="dashChart" class="chart"></div></div>
+    </div>
+    <div class="section card"><h2>Recent Daily Records</h2><div id="recentRecords" class="muted">No records.</div></div>
+  </section>
+
+  <section id="daily-entry" class="page hidden">
+    <div class="card">
+      <h2>Daily Entry</h2>
+      <div class="formgrid">
+        <div class="field"><label>Entry Date</label><input id="entryDate" type="date"></div>
+      </div>
+    </div>
+    <div class="section card">
+      <h2>OPD — General Out Patient Care</h2>
+      <p class="muted">Total Footfall is Male + Female. Other indicators and services are separate from OPD.</p>
+      <div class="formgrid">
+        <div class="field"><label>Male</label><input id="opdMale" type="number" min="0" value="0" oninput="calcOPD()"></div>
+        <div class="field"><label>Female</label><input id="opdFemale" type="number" min="0" value="0" oninput="calcOPD()"></div>
+        <div class="field"><label>Total Footfall</label><input id="opdTotal" class="readonly" readonly></div>
+      </div>
+      <div class="subgrid">
+        <div class="subbox"><h4>In-Facility</h4><div class="mini">
+          <div class="field"><label>Male</label><input id="gIfMale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+          <div class="field"><label>Female</label><input id="gIfFemale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+          <div class="field"><label>Total</label><input id="gIfTotal" class="readonly" readonly></div>
+        </div></div>
+        <div class="subbox"><h4>Outreach</h4><div class="mini">
+          <div class="field"><label>Male</label><input id="gOfMale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+          <div class="field"><label>Female</label><input id="gOfFemale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+          <div class="field"><label>Total</label><input id="gOfTotal" class="readonly" readonly></div>
+        </div></div>
+      </div>
+      <div class="subbox" style="margin-top:14px"><h4>Referred</h4><div class="mini">
+        <div class="field"><label>In-Facility Male</label><input id="gRefIfMale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+        <div class="field"><label>In-Facility Female</label><input id="gRefIfFemale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+        <div class="field"><label>Outreach Male</label><input id="gRefOfMale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+        <div class="field"><label>Outreach Female</label><input id="gRefOfFemale" type="number" min="0" value="0" oninput="calcGOPD()"></div>
+        <div class="field"><label>Total Referred</label><input id="gRefTotal" class="readonly" readonly></div>
+      </div></div>
+    </div>
+    <div class="section card">
+      <div class="service-head"><div><h2 style="margin:0">Additional Services</h2><p class="muted">Each individual service is separate from OPD Footfall.</p></div><button class="primary" onclick="addService()">＋ Add Additional Service</button></div>
+      <div id="services"></div>
+    </div>
+    <div class="section card">
+      <h2>Other Daily Indicators</h2>
+      <p class="muted">These figures are separate from Total OPD Footfall.</p>
+      <div class="formgrid">
+        <div class="field"><label>Free & essential medicines</label><input id="meds" type="number" min="0" value="0"></div>
+        <div class="field"><label>Free & essential diagnostics</label><input id="diag" type="number" min="0" value="0"></div>
+        <div class="field"><label>Tele-consultation</label><input id="tele" type="number" min="0" value="0"></div>
+        <div class="field"><label>Wellness session</label><select id="wellness" onchange="toggleParticipants()"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+        <div class="field" id="participantField"><label>Number of Participants</label><input id="participants" type="number" min="0" value="0" disabled></div>
+      </div>
+      <div class="actions"><button class="primary" onclick="saveRecord()">💾 Save Daily Record</button><button class="secondary" onclick="resetEntry()">Clear</button></div>
+    </div>
+  </section>
+
+  <section id="daily-records" class="page hidden"><div class="card"><h2>Daily Report / Records</h2><div class="actions"><input id="dailySearch" type="date" onchange="renderDailyRecords()"><button class="secondary" onclick="renderDailyRecords()">Refresh</button></div><div id="dailyTable" style="margin-top:14px"></div></div></section>
+
+  <section id="monthly-report" class="page hidden"><div class="card"><h2>Monthly Report</h2><div class="actions"><input id="monthPick" type="month" onchange="renderMonthly()"></div><div id="monthlyContent" style="margin-top:14px"></div></div></section>
+
+  <section id="monthly-comparison" class="page hidden"><div class="card"><h2>Monthly Comparison</h2><div class="actions"><input id="m1" type="month"><input id="m2" type="month"><input id="m3" type="month"><button class="primary" onclick="renderComparison()">Compare</button></div><div id="comparisonContent" style="margin-top:14px"></div></div></section>
+
+  <section id="ai-report-assistant" class="page hidden"><div class="card"><h2>AI Report Assistant</h2><p class="muted">Generate a concise official-style summary from your saved monthly data.</p><div class="actions"><input id="aiMonth" type="month"><button class="primary" onclick="generateAI()">Generate Summary</button></div><div id="aiOutput" class="card" style="margin-top:14px;background:#f5fbfa"></div></div></section>
+
+  <section id="backup" class="page hidden"><div class="card"><h2>Backup & Restore</h2><p class="muted">Keep an encrypted-capable local backup workflow for your reporting data.</p><div class="actions"><button class="primary" onclick="downloadBackup()">⬇ Download Backup</button><label class="secondary">⬆ Restore Backup <input type="file" id="restoreFile" accept=".json" hidden onchange="restoreBackup(event)"></label></div></div></section>
+
+  <section id="facility-profile" class="page hidden"><div class="card"><h2>Facility Profile</h2><div class="formgrid">
+    <div class="field"><label>Ayushman Arogya Mandir / Sub-Centre</label><input id="facilityName"></div>
+    <div class="field"><label>Facility ID</label><input id="facilityId"></div>
+    <div class="field"><label>Village / Location</label><input id="facilityLocation"></div>
+    <div class="field"><label>Block</label><input id="facilityBlock"></div>
+    <div class="field"><label>District</label><input id="facilityDistrict"></div>
+    <div class="field"><label>State</label><input id="facilityState" value="Assam"></div>
+  </div><div class="section card" style="margin-top:14px"><h3 style="margin-top:0">Facility Logo</h3><div style="display:flex;align-items:center;gap:15px;flex-wrap:wrap"><img id="logoPreview" src="logo.jpg" alt="Logo preview" style="width:90px;height:90px;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff;padding:5px"><div class="actions" style="margin-top:0"><label class="secondary">Change / Upload Logo <input id="logoFile" type="file" accept="image/*" hidden onchange="changeLogo(event)"></label><button class="danger" onclick="removeLogo()">Remove Logo</button></div></div><p class="muted">The selected logo is saved on this device and used throughout the app.</p></div><div class="actions"><button class="primary" onclick="saveProfile()">Save Facility Profile</button></div></div></section>
+
+  <section id="profile" class="page hidden"><div class="card"><h2>My Profile</h2><div class="formgrid"><div class="field"><label>Name</label><input id="userName"></div><div class="field"><label>Designation</label><input id="userDesignation"></div><div class="field"><label>PIN</label><input id="userPin" type="password" inputmode="numeric"></div></div><div class="actions"><button class="primary" onclick="saveUser()">Save Profile</button></div></div></section>
+
+  <section id="settings" class="page hidden"><div class="card"><h2>Settings</h2><div class="actions"><button class="secondary" onclick="toggleDark()">🌙 Dark Mode</button><button class="secondary" onclick="toggleLarge()">🔠 Large Text</button><button class="danger" onclick="clearAll()">Delete All Local Data</button></div></div></section>
+</main>
+<div class="mobilebar">
+  <button data-page="dashboard">🏠<span>Home</span></button>
+  <button data-page="daily-entry">📝<span>Entry</span></button>
+  <button data-page="daily-records">📋<span>Daily</span></button>
+  <button data-page="monthly-report">📊<span>Monthly</span></button>
+  <button data-page="settings">⚙️<span>Settings</span></button>
+</div>
+<div id="toast" class="toast"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>const SERVICES=["ANC 1","ANC 2","ANC 3","ANC 4","BCG","Penta 1","Penta 2","Penta 3","MR 1","MR 2","DPT 5","Td 10","Td 16","Adolescent Counseling","Family Planning","TB Screening","HTN Screening","HTN Follow-up","DM Screening","DM Follow-up","Eye Care","ENT Care","Oral Health","Elderly Care","Palliative Care","Emergency Medical Services","Mental Health"];
+let records=JSON.parse(localStorage.getItem("aam_records")||"[]"), editingDate=null, serviceDraft=[];
+const $=id=>document.getElementById(id);
+const num=v=>Math.max(0,Number(v)||0);
+const n=id=>num($(id)?.value);
+function today(){return new Date().toISOString().slice(0,10)}
+function toast(t){$("toast").textContent=t;$("toast").style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>$("toast").style.display="none",2400)}
+function showPage(p){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));$(p).classList.remove("hidden");document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p));$("pageTitle").textContent=({dashboard:"Dashboard","daily-entry":"Daily Entry","daily-records":"Daily Report","monthly-report":"Monthly Report","monthly-comparison":"Monthly Comparison","ai-report-assistant":"AI Report Assistant",backup:"Backup & Restore",settings:"Settings","facility-profile":"Facility Profile",profile:"My Profile"})[p]||"Dashboard";if(p==="dashboard")renderDashboard();if(p==="daily-records")renderDailyRecords();if(p==="monthly-report")renderMonthly();if(p==="facility-profile")loadProfile();if(p==="profile")loadUser()}
+document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+function calcOPD(){const total=n("opdMale")+n("opdFemale");$("opdTotal").value=total;calcGOPD()}
+function calcGOPD(){const ift=n("gIfMale")+n("gIfFemale"),oft=n("gOfMale")+n("gOfFemale"),rt=n("gRefIfMale")+n("gRefIfFemale")+n("gRefOfMale")+n("gRefOfFemale");$("gIfTotal").value=ift;$("gOfTotal").value=oft;$("gRefTotal").value=rt}
+function addService(data=null){serviceDraft.push(normalizeService(data||{}));renderServices()}
+function normalizeService(s){return {name:s.name||"",ifMale:num(s.ifMale??s.ifm),ifFemale:num(s.ifFemale),ofMale:num(s.ofMale??s.ofm),ofFemale:num(s.ofFemale),rifMale:num(s.rifMale??s.rif),rifFemale:num(s.rifFemale),rofMale:num(s.rofMale??s.rof),rofFemale:num(s.rofFemale)}}
+function removeService(i){serviceDraft.splice(i,1);renderServices()}
+function updateService(i,key,value){serviceDraft[i][key]=num(value);updateServiceTotals(i)}
+function updateServiceTotals(i){const s=serviceDraft[i], card=document.querySelector(`[data-service-index="${i}"]`);if(!card)return;const vals={ifTotal:s.ifMale+s.ifFemale,ofTotal:s.ofMale+s.ofFemale,refTotal:s.rifMale+s.rifFemale+s.rofMale+s.rofFemale,total:s.ifMale+s.ifFemale+s.ofMale+s.ofFemale};Object.entries(vals).forEach(([k,v])=>{const el=card.querySelector(`[data-total="${k}"]`);if(el)el.value=v})}
+function renderServices(){const c=$("services");c.innerHTML="";serviceDraft.forEach((s,i)=>{s=serviceDraft[i]=normalizeService(s);const d=document.createElement("div");d.className="service-card card";d.dataset.serviceIndex=i;d.innerHTML=`<div class="service-head"><h3>Additional Service ${i+1}</h3><button class="danger" onclick="removeService(${i})">Remove Service</button></div><div class="formgrid" style="margin-top:12px"><div class="field"><label>Select Service</label><select onchange="serviceDraft[${i}].name=this.value"><option value="">Select Service</option>${SERVICES.map(x=>`<option value="${x}" ${x===s.name?"selected":""}>${x}</option>`).join("")}</select></div></div><div class="subgrid"><div class="subbox"><h4>In-Facility</h4><div class="mini"><div class="field"><label>Male</label><input type="number" min="0" value="${s.ifMale}" oninput="updateService(${i},'ifMale',this.value)"></div><div class="field"><label>Female</label><input type="number" min="0" value="${s.ifFemale}" oninput="updateService(${i},'ifFemale',this.value)"></div><div class="field"><label>Total</label><input class="readonly" readonly data-total="ifTotal" value="${s.ifMale+s.ifFemale}"></div></div></div><div class="subbox"><h4>Outreach</h4><div class="mini"><div class="field"><label>Male</label><input type="number" min="0" value="${s.ofMale}" oninput="updateService(${i},'ofMale',this.value)"></div><div class="field"><label>Female</label><input type="number" min="0" value="${s.ofFemale}" oninput="updateService(${i},'ofFemale',this.value)"></div><div class="field"><label>Total</label><input class="readonly" readonly data-total="ofTotal" value="${s.ofMale+s.ofFemale}"></div></div></div></div><div class="subbox" style="margin-top:12px"><h4>Referred</h4><div class="mini"><div class="field"><label>In-Facility Male</label><input type="number" min="0" value="${s.rifMale}" oninput="updateService(${i},'rifMale',this.value)"></div><div class="field"><label>In-Facility Female</label><input type="number" min="0" value="${s.rifFemale}" oninput="updateService(${i},'rifFemale',this.value)"></div><div class="field"><label>Outreach Male</label><input type="number" min="0" value="${s.rofMale}" oninput="updateService(${i},'rofMale',this.value)"></div><div class="field"><label>Outreach Female</label><input type="number" min="0" value="${s.rofFemale}" oninput="updateService(${i},'rofFemale',this.value)"></div><div class="field"><label>Total Referred</label><input class="readonly" readonly data-total="refTotal" value="${s.rifMale+s.rifFemale+s.rofMale+s.rofFemale}"></div><div class="field"><label>Service Total</label><input class="readonly" readonly data-total="total" value="${s.ifMale+s.ifFemale+s.ofMale+s.ofFemale}"></div></div></div>`;c.appendChild(d)})}
+function resetEntry(){editingDate=null;$("entryDate").value=today();["opdMale","opdFemale","gIfMale","gIfFemale","gOfMale","gOfFemale","gRefIfMale","gRefIfFemale","gRefOfMale","gRefOfFemale","meds","diag","tele","participants"].forEach(x=>{if($(x))$(x).value=0});$("wellness").value="";serviceDraft=[];calcOPD();renderServices();toggleParticipants()}
+function saveRecord(){const date=$("entryDate").value;if(!date)return toast("Select a date");const opd=n("opdTotal"),ifTotal=n("gIfTotal"),ofTotal=n("gOfTotal"),refTotal=n("gRefTotal");if(ifTotal+ofTotal!==opd)return toast(`General OPD mismatch: In-Facility ${ifTotal} + Outreach ${ofTotal} = ${ifTotal+ofTotal}; Total OPD is ${opd}`);if(refTotal>opd)return toast("Referred cannot exceed Total OPD");if(serviceDraft.some(s=>!s.name))return toast("Select a service for every added service");const rec={date,male:n("opdMale"),female:n("opdFemale"),opd,gen:{ifMale:n("gIfMale"),ifFemale:n("gIfFemale"),ofMale:n("gOfMale"),ofFemale:n("gOfFemale"),rifMale:n("gRefIfMale"),rifFemale:n("gRefIfFemale"),rofMale:n("gRefOfMale"),rofFemale:n("gRefOfFemale")},services:serviceDraft.map(normalizeService),meds:n("meds"),diag:n("diag"),tele:n("tele"),wellness:$("wellness").value,participants:$("wellness").value==="Yes"?n("participants"):0};const idx=records.findIndex(r=>r.date===date);if(idx>=0)records[idx]=rec;else records.push(rec);records.sort((a,b)=>b.date.localeCompare(a.date));localStorage.setItem("aam_records",JSON.stringify(records));toast(idx>=0?"Daily record updated":"Daily record saved");resetEntry();showPage("daily-records")}
+function editRecord(date){const r=records.find(x=>x.date===date);if(!r)return;editingDate=date;$("entryDate").value=r.date;$("opdMale").value=r.male||0;$("opdFemale").value=r.female||0;const g=r.gen||{};$("gIfMale").value=g.ifMale??g.ifm??0;$("gIfFemale").value=g.ifFemale??0;$("gOfMale").value=g.ofMale??g.ofm??0;$("gOfFemale").value=g.ofFemale??0;$("gRefIfMale").value=g.rifMale??g.rif??0;$("gRefIfFemale").value=g.rifFemale??0;$("gRefOfMale").value=g.rofMale??g.rof??0;$("gRefOfFemale").value=g.rofFemale??0;$("meds").value=r.meds||0;$("diag").value=r.diag||0;$("tele").value=r.tele||0;$("wellness").value=r.wellness||"";$("participants").value=r.participants||0;serviceDraft=(r.services||[]).map(normalizeService);calcOPD();renderServices();toggleParticipants();showPage("daily-entry")}
+function deleteRecord(date){if(confirm("Delete this daily record?")){records=records.filter(r=>r.date!==date);localStorage.setItem("aam_records",JSON.stringify(records));renderDailyRecords();renderDashboard();toast("Record deleted")}}
+function renderDailyRecords(){const q=$("dailySearch").value,arr=q?records.filter(r=>r.date===q):records;if(!arr.length){$("dailyTable").innerHTML='<p class="muted">No records found.</p>';return}$("dailyTable").innerHTML='<div class="tablewrap"><table class="table"><tr><th>Date</th><th>Male</th><th>Female</th><th>Total OPD</th><th>Services</th><th>Actions</th></tr>'+arr.map(r=>`<tr><td>${r.date}</td><td>${r.male||0}</td><td>${r.female||0}</td><td><b>${r.opd||0}</b></td><td>${(r.services||[]).length}</td><td><button class="secondary" onclick="editRecord('${r.date}')">Edit</button> <button class="danger" onclick="deleteRecord('${r.date}')">Delete</button></td></tr>`).join("")+'</table></div>'}
+function monthData(m){const rs=records.filter(r=>r.date.startsWith(m));const out={male:0,female:0,opd:0,meds:0,diag:0,tele:0,participants:0,services:{}};rs.forEach(r=>{out.male+=num(r.male);out.female+=num(r.female);out.opd+=num(r.opd);out.meds+=num(r.meds);out.diag+=num(r.diag);out.tele+=num(r.tele);out.participants+=r.wellness==="Yes"?num(r.participants):0;(r.services||[]).forEach(raw=>{const s=normalizeService(raw);if(!s.name)return;if(!out.services[s.name])out.services[s.name]={ifMale:0,ifFemale:0,ofMale:0,ofFemale:0,rifMale:0,rifFemale:0,rofMale:0,rofFemale:0};const x=out.services[s.name];Object.keys(x).forEach(k=>x[k]+=s[k])})});Object.values(out.services).forEach(x=>{x.ifTotal=x.ifMale+x.ifFemale;x.ofTotal=x.ofMale+x.ofFemale;x.refTotal=x.rifMale+x.rifFemale+x.rofMale+x.rofFemale;x.total=x.ifTotal+x.ofTotal});return out}
+function renderMonthly(){const m=$("monthPick").value||today().slice(0,7);$("monthPick").value=m;const d=monthData(m),rows=Object.entries(d.services);$("monthlyContent").innerHTML=`<div class="grid"><div class="card stat"><small>Total OPD Footfall</small><strong>${d.opd}</strong></div><div class="card stat"><small>Male</small><strong>${d.male}</strong></div><div class="card stat"><small>Female</small><strong>${d.female}</strong></div><div class="card stat"><small>Free Medicines</small><strong>${d.meds}</strong></div><div class="card stat"><small>Free Diagnostics</small><strong>${d.diag}</strong></div><div class="card stat"><small>Tele-consultation</small><strong>${d.tele}</strong></div><div class="card stat"><small>Wellness Participants</small><strong>${d.participants}</strong></div></div><div class="section tablewrap"><table class="table"><tr><th>Service</th><th>IF Male</th><th>IF Female</th><th>IF Total</th><th>Outreach Male</th><th>Outreach Female</th><th>Outreach Total</th><th>Ref. IF Male</th><th>Ref. IF Female</th><th>Ref. Outreach Male</th><th>Ref. Outreach Female</th><th>Ref. Total</th><th>Total</th></tr>${rows.length?rows.map(([name,x])=>`<tr><td><b>${name}</b></td><td>${x.ifMale}</td><td>${x.ifFemale}</td><td>${x.ifTotal}</td><td>${x.ofMale}</td><td>${x.ofFemale}</td><td>${x.ofTotal}</td><td>${x.rifMale}</td><td>${x.rifFemale}</td><td>${x.rofMale}</td><td>${x.rofFemale}</td><td>${x.refTotal}</td><td>${x.total}</td></tr>`).join(""):'<tr><td colspan="13" class="muted">No additional services recorded.</td></tr>'}</table></div>`}
+function renderComparison(){const ms=[$("m1").value,$("m2").value,$("m3").value].filter(Boolean);if(!ms.length)return toast("Select at least one month");const all=[...new Set(ms.flatMap(m=>Object.keys(monthData(m).services)))];$("comparisonContent").innerHTML=`<div class="tablewrap"><table class="table"><tr><th>Indicator</th>${ms.map(m=>`<th>${m} OPD</th>`).join("")}</tr><tr><td><b>Total OPD Footfall</b></td>${ms.map(m=>`<td><b>${monthData(m).opd}</b></td>`).join("")}</tr>${all.map(name=>`<tr><td>${name}</td>${ms.map(m=>`<td>${monthData(m).services[name]?.total||0}</td>`).join("")}</tr>`).join("")}</table></div>`}
+function renderDashboard(){const d=records[0];$("dOpd").textContent=d?.opd||0;$("dMale").textContent=d?.male||0;$("dFemale").textContent=d?.female||0;$("dashOverview").innerHTML=d?`<b>${d.date}</b><br>Medicines: ${d.meds||0} &nbsp; Diagnostics: ${d.diag||0} &nbsp; Tele-consultation: ${d.tele||0}<br>Additional services: ${(d.services||[]).length} &nbsp; Wellness: ${d.wellness||"Not selected"}${d.wellness==="Yes"?` &nbsp; Participants: ${d.participants||0}`:""}`:"No daily record saved yet.";let months=[];for(let i=5;i>=0;i--){const x=new Date();x.setMonth(x.getMonth()-i);const m=x.toISOString().slice(0,7);months.push([m,monthData(m).opd])}const mx=Math.max(1,...months.map(x=>x[1]));$("dashChart").innerHTML=months.map(x=>`<div class="bar" style="height:${Math.max(8,x[1]/mx*170)}px"><span>${x[0].slice(5)}<br>${x[1]}</span></div>`).join("");$("recentRecords").innerHTML=records.slice(0,5).map(r=>`<div style="padding:9px 0;border-bottom:1px solid var(--line)"><b>${r.date}</b> — OPD ${r.opd||0} — ${(r.services||[]).length} services</div>`).join("")||"No records."}
+function generateAI(){const m=$("aiMonth").value||today().slice(0,7),d=monthData(m),sv=Object.entries(d.services).sort((a,b)=>b[1].total-a[1].total);$("aiOutput").innerHTML=`<b>Monthly Summary — ${m}</b><p>The facility recorded <b>${d.opd}</b> total OPD footfall (${d.male} male, ${d.female} female). Free medicines were dispensed to ${d.meds} patients, ${d.diag} availed free diagnostics and ${d.tele} received tele-consultation.</p><p>Additional services recorded: <b>${sv.length}</b>. Highest recorded service by total: <b>${sv[0]?.[0]||"None"}</b> (${sv[0]?.[1]?.total||0}).</p>`}
+function toggleParticipants(){$("participants").disabled=$("wellness").value!=="Yes";$("participantField").style.opacity=$("wellness").value==="Yes"?"1":".55";if($("participants").disabled)$("participants").value=0}
+function downloadBackup(){const blob=new Blob([JSON.stringify({version:3,records,profile:localStorage.getItem("aam_profile"),user:localStorage.getItem("aam_user"),logo:localStorage.getItem("aam_logo")},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="aam-backup-v3.json";a.click();URL.revokeObjectURL(a.href)}
+function restoreBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);records=x.records||[];localStorage.setItem("aam_records",JSON.stringify(records));if(x.profile)localStorage.setItem("aam_profile",x.profile);if(x.user)localStorage.setItem("aam_user",x.user);if(x.logo)localStorage.setItem("aam_logo",x.logo);applyLogo();renderDashboard();toast("Backup restored")}catch{toast("Invalid backup file")}};r.readAsText(f)}
+function saveProfile(){const x={name:$("facilityName").value,id:$("facilityId").value,location:$("facilityLocation").value,block:$("facilityBlock").value,district:$("facilityDistrict").value,state:$("facilityState").value};localStorage.setItem("aam_profile",JSON.stringify(x));toast("Facility profile saved")}
+function loadProfile(){const x=JSON.parse(localStorage.getItem("aam_profile")||"{}");$("facilityName").value=x.name||"";$("facilityId").value=x.id||"";$("facilityLocation").value=x.location||"";$("facilityBlock").value=x.block||"";$("facilityDistrict").value=x.district||"";$("facilityState").value=x.state||"Assam";applyLogo()}
+function changeLogo(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{localStorage.setItem("aam_logo",rd.result);applyLogo();toast("Logo updated")};rd.readAsDataURL(f)}
+function removeLogo(){localStorage.removeItem("aam_logo");applyLogo();toast("Default logo restored")}
+function applyLogo(){const src=localStorage.getItem("aam_logo")||"logo.jpg";document.querySelectorAll(".brand img").forEach(i=>i.src=src);if($("logoPreview"))$("logoPreview").src=src}
+function saveUser(){localStorage.setItem("aam_user",JSON.stringify({name:$("userName").value,designation:$("userDesignation").value,pin:$("userPin").value}));toast("Profile saved")}
+function loadUser(){const x=JSON.parse(localStorage.getItem("aam_user")||"{}");$("userName").value=x.name||"";$("userDesignation").value=x.designation||"";$("userPin").value=x.pin||""}
+function toggleDark(){document.body.style.background="#102523";document.documentElement.style.setProperty("--card","#17332f");document.documentElement.style.setProperty("--text","#effffb");document.documentElement.style.setProperty("--line","#31534f");toast("Dark mode enabled")}
+function toggleLarge(){document.body.style.fontSize="18px";toast("Large text enabled")}
+function clearAll(){if(confirm("Delete ALL saved local data? This cannot be undone.")){localStorage.removeItem("aam_records");records=[];toast("All local data deleted");renderDashboard()}}
+$("entryDate").value=today();toggleParticipants();$("monthPick").value=today().slice(0,7);$("aiMonth").value=today().slice(0,7);calcOPD();renderServices();applyLogo();showPage("dashboard");if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});initCloud();
+
+/* ===== AAM Daily Report V4 — Supabase Cloud Sync ===== */
+const SUPABASE_URL="https://yuvxgpppgzqhcywryxpq.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_5cS7rdKZZkZjms2On_zo6A_wBao6sgB";
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+let currentSession=null;
+
+function setAuthMsg(t,error=false){const e=$("authMsg");if(e){e.textContent=t;e.style.color=error?"#b42318":"#0f766e"}}
+function setCloudStatus(t){const e=$("cloudStatus");if(e)e.textContent=t}
+function showAuth(show){$("authOverlay").style.display=show?"flex":"none";$("logoutBtn").style.display=show?"none":"inline-block"}
+
+async function cloudLogin(){
+  const email=$("authEmail").value.trim(), password=$("authPassword").value;
+  if(!email||!password)return setAuthMsg("Enter email and password.",true);
+  setAuthMsg("Signing in…");
+  const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error)setAuthMsg(error.message,true);
+}
+async function cloudSignup(){
+  const email=$("authEmail").value.trim(), password=$("authPassword").value;
+  if(!email||!password)return setAuthMsg("Enter email and password.",true);
+  if(password.length<6)return setAuthMsg("Password must be at least 6 characters.",true);
+  setAuthMsg("Creating account…");
+  const {data,error}=await supabaseClient.auth.signUp({email,password});
+  if(error)return setAuthMsg(error.message,true);
+  if(data.session)setAuthMsg("Account created. Signing in…");
+  else setAuthMsg("Account created. Check your email to confirm, then sign in.");
+}
+async function cloudLogout(){await supabaseClient.auth.signOut();}
+
+function recordPayload(r){
+  const x=JSON.parse(JSON.stringify(r));
+  x.updatedAt=x.updatedAt||new Date().toISOString();
+  return x;
+}
+async function cloudUpsertRecord(r){
+  if(!currentSession)return false;
+  const payload=recordPayload(r);
+  const {error}=await supabaseClient.from("daily_reports").upsert({user_id:currentSession.user.id,entry_date:r.date,report_data:payload},{onConflict:"user_id,entry_date"});
+  if(error){toast("Cloud save failed: "+error.message);return false}
+  return true;
+}
+async function cloudDeleteRecord(date){
+  if(!currentSession)return false;
+  const {error}=await supabaseClient.from("daily_reports").delete().eq("user_id",currentSession.user.id).eq("entry_date",date);
+  if(error){toast("Cloud delete failed: "+error.message);return false}
+  return true;
+}
+
+async function syncRecords(){
+  if(!currentSession)return;
+  setCloudStatus("☁ Syncing…");
+  const {data,error}=await supabaseClient.from("daily_reports").select("entry_date,report_data,updated_at").eq("user_id",currentSession.user.id).order("entry_date",{ascending:false});
+  if(error){setCloudStatus("☁ Sync error");toast("Could not load cloud data: "+error.message);return}
+  const cloud=new Map((data||[]).map(row=>[row.entry_date,{...row.report_data,updatedAt:row.report_data?.updatedAt||row.updated_at}]));
+  const localMap=new Map(records.map(r=>[r.date,r]));
+  // Upload local-only records. If both exist, newest updatedAt wins.
+  for(const [date,lr] of localMap){
+    const cr=cloud.get(date);
+    if(!cr){await cloudUpsertRecord(lr);cloud.set(date,recordPayload(lr));}
+    else if(new Date(lr.updatedAt||0)>new Date(cr.updatedAt||0)){await cloudUpsertRecord(lr);cloud.set(date,recordPayload(lr));}
+  }
+  records=[...cloud.values()].sort((a,b)=>b.date.localeCompare(a.date));
+  localStorage.setItem("aam_records",JSON.stringify(records));
+  renderDashboard();renderDailyRecords();renderMonthly();
+  setCloudStatus("☁ Synced");
+}
+
+async function initCloud(){
+  setCloudStatus("☁ Checking login…");
+  const {data}=await supabaseClient.auth.getSession();
+  currentSession=data.session;
+  if(currentSession){
+    showAuth(false);setCloudStatus("☁ Signed in");
+    await loadCloudProfile();
+    await syncRecords();
+  }else{
+    showAuth(true);setCloudStatus("☁ Sign in required");
+  }
+  supabaseClient.auth.onAuthStateChange(async (_event,session)=>{
+    currentSession=session;
+    if(session){showAuth(false);setCloudStatus("☁ Signed in");await loadCloudProfile();await syncRecords();}
+    else{showAuth(true);setCloudStatus("☁ Sign in required");}
+  });
+}
+
+async function loadCloudProfile(){
+  try{
+    const md=currentSession?.user?.user_metadata||{};
+    if(md.user_profile){localStorage.setItem("aam_user",JSON.stringify(md.user_profile));loadUser()}
+    if(md.facility_profile){localStorage.setItem("aam_profile",JSON.stringify(md.facility_profile));loadProfile()}
+  }catch(e){}
+}
+
+saveRecord=async function(){
+  const date=$("entryDate").value;if(!date)return toast("Select a date");
+  const opd=n("opdTotal"),ifTotal=n("gIfTotal"),ofTotal=n("gOfTotal"),refTotal=n("gRefTotal");
+  if(ifTotal+ofTotal!==opd)return toast(`General OPD mismatch: In-Facility ${ifTotal} + Outreach ${ofTotal} = ${ifTotal+ofTotal}; Total OPD is ${opd}`);
+  if(refTotal>opd)return toast("Referred cannot exceed Total OPD");
+  if(serviceDraft.some(s=>!s.name))return toast("Select a service for every added service");
+  const now=new Date().toISOString();
+  const rec={date,male:n("opdMale"),female:n("opdFemale"),opd,gen:{ifMale:n("gIfMale"),ifFemale:n("gIfFemale"),ofMale:n("gOfMale"),ofFemale:n("gOfFemale"),rifMale:n("gRefIfMale"),rifFemale:n("gRefIfFemale"),rofMale:n("gRefOfMale"),rofFemale:n("gRefOfFemale")},services:serviceDraft.map(normalizeService),meds:n("meds"),diag:n("diag"),tele:n("tele"),wellness:$("wellness").value,participants:$("wellness").value==="Yes"?n("participants"):0,updatedAt:now};
+  const idx=records.findIndex(r=>r.date===date);if(idx>=0)records[idx]=rec;else records.push(rec);records.sort((a,b)=>b.date.localeCompare(a.date));
+  localStorage.setItem("aam_records",JSON.stringify(records));
+  const ok=await cloudUpsertRecord(rec);
+  if(!ok)return;
+  toast(idx>=0?"Daily record updated & synced":"Daily record saved & synced");resetEntry();renderDailyRecords();renderDashboard();showPage("daily-records");
+};
+
+deleteRecord=async function(date){
+  if(!confirm("Delete this daily record from this device and cloud?"))return;
+  const ok=await cloudDeleteRecord(date);if(!ok)return;
+  records=records.filter(r=>r.date!==date);localStorage.setItem("aam_records",JSON.stringify(records));renderDailyRecords();renderDashboard();toast("Record deleted & synced");
+};
+
+saveProfile=async function(){
+  const x={name:$("facilityName").value,id:$("facilityId").value,location:$("facilityLocation").value,block:$("facilityBlock").value,district:$("facilityDistrict").value,state:$("facilityState").value};
+  localStorage.setItem("aam_profile",JSON.stringify(x));
+  if(currentSession){const md={...(currentSession.user.user_metadata||{}),facility_profile:x};const {error}=await supabaseClient.auth.updateUser({data:md});if(error)return toast("Profile cloud save failed: "+error.message)}
+  toast("Facility profile saved");
+};
+saveUser=async function(){
+  const x={name:$("userName").value,designation:$("userDesignation").value,pin:$("userPin").value};localStorage.setItem("aam_user",JSON.stringify(x));
+  if(currentSession){const md={...(currentSession.user.user_metadata||{}),user_profile:x};const {error}=await supabaseClient.auth.updateUser({data:md});if(error)return toast("User profile cloud save failed: "+error.message)}
+  toast("Profile saved");
+};
+
+clearAll=async function(){
+  if(!confirm("Delete ALL your daily records from this device and cloud? This cannot be undone."))return;
+  if(currentSession){const {error}=await supabaseClient.from("daily_reports").delete().eq("user_id",currentSession.user.id);if(error)return toast("Cloud delete failed: "+error.message)}
+  localStorage.removeItem("aam_records");records=[];renderDashboard();renderDailyRecords();toast("All daily records deleted");
+};
+
+</script>
+</body></html>
